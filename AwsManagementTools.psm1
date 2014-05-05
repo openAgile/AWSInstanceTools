@@ -71,4 +71,11 @@ function Start-EC2InstancesWithFilter {
     Write-Host "Finished running Start-EC2InstancesWithFilter."
 }
 
+function Stop-EC2InstancesWithFilter {
+    param([parameter(Mandatory=$true)] [string]$filter)
+    
+    ($instances = Get-EC2InstancesWithFilter $filter | IsRunning) |
+    Stop-EC2Instance
+}
+
 Export-ModuleMember -Function Stop-AllEC2Instances,Get-EC2InstancesWithFilter,Start-EC2InstancesWithFilter
