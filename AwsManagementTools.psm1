@@ -78,4 +78,4 @@ function Stop-EC2InstancesWithFilter {
     Stop-EC2Instance
 }
 
-Export-ModuleMember -Function Stop-AllEC2Instances,Get-EC2InstancesWithFilter,Start-EC2InstancesWithFilter
+Export-ModuleMember -Function Stop-AllEC2Instances,Get-EC2InstancesWithFilter,Start-EC2InstancesWithFilter,Stop-EC2InstancesWithFilter
