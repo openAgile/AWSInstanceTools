@@ -2,7 +2,7 @@ Set-ExecutionPolicy Unrestricted
 if ($PSVersionTable.PSVersion.Major -lt 4) {
   cinst powershell4
   $title = "Reboot"
-  $message = "Would you like to reboot now to complete the Powershell 4 upgrade?"
+  $message = "Sometimes a reboot is required after upgrading to Powershell 4. Would you like to reboot now to safe?"
   
   $yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", `
       "Reboot now."
