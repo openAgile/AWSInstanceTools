@@ -2,13 +2,11 @@
 
 Amazon Web Services Instance Tools lets you simplify using the AWS Powershell Tools to start and stop your AWS EC2 virtual machines.
 
-# Getting Started
-
-## Requirements
+# Requirements
 
 * Powershell 4.0
 
-## Installing
+# Install
 
 It's easy to install using our install scripts 01 - 03. 
 
