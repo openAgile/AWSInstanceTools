@@ -1,4 +1,3 @@
-Set-ExecutionPolicy Unrestricted
 if ($PSVersionTable.PSVersion.Major -lt 4) {
   cinst powershell4
   $title = "Reboot"
