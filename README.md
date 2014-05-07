@@ -16,6 +16,40 @@ It's easy to install using our install scripts 01 - 03.
 * Finally, run script #3 from Powershell to install PsGet and the AWSInstanceTools themselves.
 
 # Usage
+To test that you are configured correctly, run this command:
+`Get-EC2InstancesWithFilter "*"  | select -expand Tags`
 
-TODO provide examples
+Expect something like this as a result:
+```
+PS C:\Users\Daniel> Get-EC2InstancesWithFilter "*"  | select -expand Tags
 
+Key                                                         Value
+---                                                         -----
+Name                                                        i-12345678
+Name                                                        i-0abcdefg
+Name                                                        ClarityOne Sandbox - V1
+Name                                                        ClarityOne Sandbox - Clarity PPM
+Name                                                        Demo Data
+Name                                                        i-23456789
+Name                                                        Clarity PPM
+```
+
+
+# Get several instances' IP addresses
+We can get one or more instances by passing a filter. This filters by the tag name.
+`Get-EC2InstancesWithFilter "ClarityOne*" | select -expand PublicIpAddress`
+The previous example gets all the instances with the tag name that starts with "ClarityOne".
+We can also reduce the amount of information we show. Doing the next we only show the ip addresses for those instances.
+`Get-EC2InstancesWithFilter "ClarityOne*" | select -expand PublicIpAddress`
+
+# Stopping all instances
+If you want to stop all running instances, but not terminate them, then do this:
+`Stop-AllEC2Instances`
+
+# Stopping several instances with a filter
+The next works in the same way than Get-EC2InstancesWithFilter but instead of getting the instances it stops them.
+`Stop-EC2InstancesWithFilter "Clarity*"`
+
+# Starting several instances with a filter 
+Same as the previous example but it starts instances.
+`Start-EC2InstancesWithFilter "Clarity*"`
