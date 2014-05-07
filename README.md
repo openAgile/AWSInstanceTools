@@ -70,6 +70,6 @@ Stop-EC2InstancesWithFilter "Clarity*"
 # Starting several instances with a filter 
 Same as the previous example but it starts instances:
 
-```
+```powershell
 Start-EC2InstancesWithFilter "Clarity*"
 ```
