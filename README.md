@@ -43,14 +43,14 @@ Name                                                        Clarity PPM
 We can get one or more instances by passing a filter. This filters by the tag name:
 
 ```powershell
-Get-EC2InstancesWithFilter "ClarityOne*" | select -expand PublicIpAddress`
+Get-EC2InstancesWithFilter "ClarityOne*" | select -expand PublicIpAddress
 ```
 
 The previous example gets all the instances with the tag name that starts with "ClarityOne".
 We can also reduce the amount of information we show. Doing the next we only show the ip addresses for those instances:
 
 ```powershell
-Get-EC2InstancesWithFilter "ClarityOne*" | select -expand PublicIpAddress`
+Get-EC2InstancesWithFilter "ClarityOne*" | select -expand PublicIpAddress
 ```
 
 # Stopping all instances
