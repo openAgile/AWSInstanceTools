@@ -61,14 +61,14 @@ Stop-AllEC2Instances
 ```
 
 # Stopping several instances with a filter
-The next works in the same way than Get-EC2InstancesWithFilter but instead of getting the instances it stops them:
+The next works in the same way as `Get-EC2InstancesWithFilter`, but instead of getting the instances it stops them:
 
 ```powershell
 Stop-EC2InstancesWithFilter "Clarity*"
 ```
 
 # Starting several instances with a filter 
-Same as the previous example but it starts instances:
+Like the previous example, but starts instances:
 
 ```powershell
 Start-EC2InstancesWithFilter "Clarity*"
