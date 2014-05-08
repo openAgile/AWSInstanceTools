@@ -12,8 +12,8 @@ It's easy to install using our install scripts 01 - 03.
 
 * If you don't have Chocolatey, open `CMD.exe` and run script #1 to install Chocolatey. Once done, open a **brand new Powershell** window as Administrator.
 * Type `Set-ExecutionPoliciy Unrestricted` to allow running *powerful* scripts.
-* If you don't have Powershell 4, or don't know what version you have, open Powershell as Administrator and run script #2 by typing `./02_install_powershell4.ps1`. This determines if you need to upgrade and uses Chocolatey to install Powershell 4 if you do. **Warning: this will prompt you to reboot to ensure all path environment variables are updated. You can try without rebooting, but you might need to anyway.**
-* Finally, run script #3 from Powershell to install PsGet and the AWSInstanceTools themselves.
+* If you don't have Powershell 4, or don't know what version you have, run script #2 by typing `.\02_install_powershell4.ps1`. This determines if you need to upgrade and uses Chocolatey to install Powershell 4 if you do. **Warning: this will prompt you to reboot to ensure all path environment variables are updated. You can try without rebooting, but you might need to anyway.**
+* Finally, run script #3 with `.\03_install_modules.ps1` from Powershell to install PsGet and the AWSInstanceTools themselves.
 
 # Usage
 To test that you are configured correctly, run this command:
