@@ -12,8 +12,6 @@ Don't worry, all of these will be installed with our set up scripts:
 
 # Install
 
-It's easy to install using our install scripts 01 - 03. 
-
 * Open Powershell as Administrator
 * Clone this repository with `git clone https://github.com/openAgile/AWSInstanceTools.git`
 * Type `cd AWSInstanceTools`
