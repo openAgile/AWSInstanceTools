@@ -17,9 +17,9 @@ It's easy to install using our install scripts 01 - 03.
 * Open Powershell as Administrator
 * Clone this repository with `git clone https://github.com/openAgile/AWSInstanceTools.git`
 * Type `cd AWSInstanceTools`
-* Type `cinst` to see if you already have Chocolatey installed. If not, type `cmd` to start a simple command shell, then types `01_install_chocolatey.bat` to install Chocolatey. When done, open a **brand new Powershell** window as Administrator so that you have an updated PATH.
+* Type `gcm cinst` to see if you already have Chocolatey installed. If it doesn't return `cinst.bat`, then type `cmd` to start a simple command shell, then type `01_install_chocolatey.bat` to install Chocolatey. When done, open a **brand new Powershell** window as Administrator so that you have an updated PATH.
 * Type `Set-ExecutionPoliciy Unrestricted` to allow running *powerful* scripts.
-* Type `$PSVersionTable.PSVersion` to see you already have Powershell 4 installed. If not, type `.\02_install_powershell4.ps1`. This determines if you need to upgrade and uses Chocolatey to install Powershell 4 if you do. **Warning: this will prompt you to reboot to ensure all path environment variables are updated. You can try without rebooting, but you might need to anyway.**
+* Type `$PSVersionTable.PSVersion` to see if you already have Powershell 4 installed. If not, type `.\02_install_powershell4.ps1`. This determines if you need to upgrade and uses Chocolatey to install Powershell 4 if you do. **Warning: this will prompt you to reboot to ensure all path environment variables are updated. You can try without rebooting, but you might need to anyway.**
 * Next, type `.\03_install_modules.ps1` from Powershell to install **PsGet** and the **AWSInstanceTools** module.
 * **VersionOne Team:** If you're using this as a VersionOne employee, go to our private `ProviderCredentials` repo and execute the `AmazonWebServices/InitializeDefaultCreds.ps1` script in your Powershell window. This will configure your system with the credentials for AWS. The configuration is saved, so you never have to do it again.
 * If you're using these tools from another company, you will have to follow the instructions in the [Amazon Powershell Tools Documentation](http://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up.html) for getting your default credentials set up.
