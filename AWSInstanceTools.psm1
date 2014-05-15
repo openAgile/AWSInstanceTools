@@ -1,4 +1,8 @@
-﻿filter IsRunning {
+﻿filter IsStopped {
+    if($_.State.Name -eq 'stopped') { $_ }
+}
+
+filter IsRunning {
     if($_.State.Name -eq 'running') { $_ }
 }
 
@@ -11,7 +15,7 @@ filter IsNotStopped {
 }
 
 function Stop-AllEC2Instances {
-    (Get-EC2Instance).Instances | IsNotStopped |
+    (Get-EC2Instance).Instances | IsRunning |
     % { Stop-EC2Instance -Instance $_.InstanceId -Force }
 }
 
@@ -64,7 +68,7 @@ function GetEC2InstancesStatus {
 function Start-EC2InstancesWithFilter {
     param([parameter(Mandatory=$true)] [string]$filter)
     
-    ($instances = Get-EC2InstancesWithFilter $filter | IsNotRunning ) |
+    ($instances = Get-EC2InstancesWithFilter $filter | IsStopped ) |
     Start-EC2Instance >> $null
     
     GetEC2InstancesStatus $instances.InstanceId 1
