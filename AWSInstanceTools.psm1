@@ -19,6 +19,21 @@ function Stop-AllEC2Instances {
     % { Stop-EC2Instance -Instance $_.InstanceId -Force }
 }
 
+function Stop-AllEC2InstancesExcept {
+    param([parameter(Mandatory=$true)][string]$filter)
+    (Get-EC2Instance).Instances | IsRunning |
+    ? { 
+       if( $_.Tags.Key.Contains("Name"))
+       {
+            $i = $_.Tags.Key.IndexOf("Name")
+            $_.Tags[$i].Value -notlike $filter
+       }
+       else
+       { $true }
+    } |
+    % { Stop-EC2Instance -Instance $_.InstanceId -Force }
+}
+
 function Get-EC2InstancesWithFilter {
     param([parameter(Mandatory=$true)][string]$filter)
     (Get-EC2Instance -Filter @{ Name="tag:Name"; Value="$filter"}).Instances
@@ -82,4 +97,4 @@ function Stop-EC2InstancesWithFilter {
     Stop-EC2Instance
 }
 
-Export-ModuleMember -Function Stop-AllEC2Instances,Get-EC2InstancesWithFilter,Start-EC2InstancesWithFilter,Stop-EC2InstancesWithFilter
+Export-ModuleMember -Function Stop-AllEC2Instances,Get-EC2InstancesWithFilter,Start-EC2InstancesWithFilter,Stop-EC2InstancesWithFilter,Stop-AllEC2InstancesExcept
