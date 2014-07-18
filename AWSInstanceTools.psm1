@@ -51,8 +51,8 @@ function Start-EC2InstancesWithFilter {
 # private functions
 function FilterInstances {
     param(
-    [parameter(ValueFromPipeline=$true)]$instances,
-    [parameter(Mandatory=$true,Position=0)]$filters)
+    [parameter(Mandatory=$true)]$instances,
+    [parameter(Mandatory=$true)]$filters)
     
     $instances | ? { 
         if( $_.Tags.Key.Contains("Name"))
@@ -127,22 +127,22 @@ function Stop-AllEC2Instances {
     % { Stop-EC2Instance -Instance $_.InstanceId -Force }
 }
 
-
-
 function Get-EC2InstancesWithTagName {
-    param([parameter(Mandatory=$true)]$tagName, $exclude)
+    param(
+    [parameter(Mandatory=$true,Position=0)]$tagName,    
+    $exclude)
     
     $instances = (Get-EC2Instance -Filter @{ Name="tag:Name"; Value="$tagName"}).Instances
     
     if($exclude -ne $null) {
-        $instances = ($instances | FilterInstances $exclude)
+        $instances = (FilterInstances $instances $exclude)
     }
     
     $instances
 }
 
 function Start-EC2InstancesWithTagName {
-    param([parameter(Mandatory=$true)] [string]$tagName)
+    param([parameter(Mandatory=$true)] $tagName)
     
     ($instances = Get-EC2InstancesWithTagName $tagName | IsStopped ) |
     Start-EC2Instance >> $null
@@ -152,13 +152,10 @@ function Start-EC2InstancesWithTagName {
 }
 
 function Stop-EC2InstancesWithTagName {
-    param([parameter(Mandatory=$true)] [string]$tagName)
+    param([parameter(Mandatory=$true)] $tagName)
     
     ($instances = Get-EC2InstancesWithTagName $tagName | IsRunning) |
     Stop-EC2Instance
 }
-
-
-
 
 Export-ModuleMember -Function Stop-AllEC2Instances,Stop-AllEC2InstancesExcept,Get-EC2InstancesWithTagName,Get-EC2InstancesWithFilter,Start-EC2InstancesWithTagName,Start-EC2InstancesWithFilter,Stop-EC2InstancesWithTagName,Stop-EC2InstancesWithFilter
