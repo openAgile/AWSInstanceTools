@@ -14,29 +14,61 @@ filter IsNotStopped {
     if($_.State.Name -ne 'stopped') { $_ }
 }
 
-function Stop-AllEC2Instances {
-    (Get-EC2Instance).Instances | IsRunning |
-    % { Stop-EC2Instance -Instance $_.InstanceId -Force }
-}
-
+#deprecated
 function Stop-AllEC2InstancesExcept {
-    param([parameter(Mandatory=$true)][string]$filter)
-    (Get-EC2Instance).Instances | IsRunning |
-    ? { 
-       if( $_.Tags.Key.Contains("Name"))
-       {
-            $i = $_.Tags.Key.IndexOf("Name")
-            $_.Tags[$i].Value -notlike $filter
-       }
-       else
-       { $true }
-    } |
-    % { Stop-EC2Instance -Instance $_.InstanceId -Force }
+    param([parameter(Mandatory=$true)][string]$filters)
+    Write-Host 'Deprecated, use Stop-AllEC2Instances -exclude instead.' -ForegroundColor Red
+    Get-Ec2InstancesExcept | IsRunning | % { Stop-EC2Instance -Instance $_.InstanceId -Force }
 }
 
+#deprecated
 function Get-EC2InstancesWithFilter {
     param([parameter(Mandatory=$true)][string]$filter)
+    Write-Host 'Deprecated, use Get-EC2InstancesWithTagName instead.' -ForegroundColor Red
     (Get-EC2Instance -Filter @{ Name="tag:Name"; Value="$filter"}).Instances
+}
+
+#deprecated
+function Stop-EC2InstancesWithFilter {
+    param([parameter(Mandatory=$true)] [string]$filter)
+    Write-Host 'Deprecated, use Stop-EC2InstancesWithTagName instead.' -ForegroundColor Red
+    ($instances = Get-EC2InstancesWithFilter $filter | IsRunning) |
+    Stop-EC2Instance
+}
+
+#deprecated
+function Start-EC2InstancesWithFilter {
+    param([parameter(Mandatory=$true)] [string]$filter)
+    Write-Host 'Deprecated, use Start-EC2InstancesWithTagName instead.' -ForegroundColor Red
+    
+    ($instances = Get-EC2InstancesWithFilter $filter | IsStopped ) |
+    Start-EC2Instance >> $null
+    
+    GetEC2InstancesStatus $instances.InstanceId 1
+    Write-Host "Finished running Start-EC2InstancesWithFilter."
+}
+
+# private functions
+function FilterInstances {
+    param(
+    [parameter(ValueFromPipeline=$true)]$instances,
+    [parameter(Mandatory=$true,Position=0)]$filters)
+    
+    $instances | ? { 
+        if( $_.Tags.Key.Contains("Name"))
+        {
+            $tagIndex = $_.Tags.Key.IndexOf("Name")
+            $tagValue = $_.Tags[$tagIndex].Value
+            $shouldPass = $true
+            # every instance iterates over all the filters, it should be true for all of them (not like any of the filter)
+            $filters | % { $shouldPass = ($shouldPass -and $tagValue -notlike $_)}
+            $shouldPass
+        }
+        #if it doesn't have name tag get it too
+        else {
+            $true
+        }
+    }
 }
 
 function WriteRunningInfo {
@@ -79,22 +111,54 @@ function GetEC2InstancesStatus {
         $notRunning | WriteNotRunningInfo
     }
 }
+# public functions
 
-function Start-EC2InstancesWithFilter {
-    param([parameter(Mandatory=$true)] [string]$filter)
+function Stop-AllEC2Instances {
+    param($exclude)
     
-    ($instances = Get-EC2InstancesWithFilter $filter | IsStopped ) |
+    $instances = $null
+    if($exclude -eq $null) {
+        $instances = (Get-EC2Instance).Instances
+    } else { 
+        $instances = Get-EC2InstancesWithTagName -exclude $exclude
+    }
+    
+    $instances | IsRunning |
+    % { Stop-EC2Instance -Instance $_.InstanceId -Force }
+}
+
+
+
+function Get-EC2InstancesWithTagName {
+    param([parameter(Mandatory=$true)]$tagName, $exclude)
+    
+    $instances = (Get-EC2Instance -Filter @{ Name="tag:Name"; Value="$tagName"}).Instances
+    
+    if($exclude -ne $null) {
+        $instances = ($instances | FilterInstances $exclude)
+    }
+    
+    $instances
+}
+
+function Start-EC2InstancesWithTagName {
+    param([parameter(Mandatory=$true)] [string]$tagName)
+    
+    ($instances = Get-EC2InstancesWithTagName $tagName | IsStopped ) |
     Start-EC2Instance >> $null
     
     GetEC2InstancesStatus $instances.InstanceId 1
     Write-Host "Finished running Start-EC2InstancesWithFilter."
 }
 
-function Stop-EC2InstancesWithFilter {
-    param([parameter(Mandatory=$true)] [string]$filter)
+function Stop-EC2InstancesWithTagName {
+    param([parameter(Mandatory=$true)] [string]$tagName)
     
-    ($instances = Get-EC2InstancesWithFilter $filter | IsRunning) |
+    ($instances = Get-EC2InstancesWithTagName $tagName | IsRunning) |
     Stop-EC2Instance
 }
 
-Export-ModuleMember -Function Stop-AllEC2Instances,Get-EC2InstancesWithFilter,Start-EC2InstancesWithFilter,Stop-EC2InstancesWithFilter,Stop-AllEC2InstancesExcept
+
+
+
+Export-ModuleMember -Function Stop-AllEC2Instances,Stop-AllEC2InstancesExcept,Get-EC2InstancesWithTagName,Get-EC2InstancesWithFilter,Start-EC2InstancesWithTagName,Start-EC2InstancesWithFilter,Stop-EC2InstancesWithTagName,Stop-EC2InstancesWithFilter
