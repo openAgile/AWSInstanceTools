@@ -16,9 +16,19 @@ filter IsNotStopped {
 
 #deprecated
 function Stop-AllEC2InstancesExcept {
-    param([parameter(Mandatory=$true)][string]$filters)
+    param([parameter(Mandatory=$true)][string]$filter)
     Write-Host 'Deprecated, use Stop-AllEC2Instances -exclude instead.' -ForegroundColor Red
-    Get-Ec2InstancesExcept | IsRunning | % { Stop-EC2Instance -Instance $_.InstanceId -Force }
+    (Get-EC2Instance).Instances | IsRunning |
+    ? { 
+       if( $_.Tags.Key.Contains("Name"))
+       {
+            $i = $_.Tags.Key.IndexOf("Name")
+            $_.Tags[$i].Value -notlike $filter
+       }
+       else
+       { $true }
+    } |
+    % { Stop-EC2Instance -Instance $_.InstanceId -Force }
 }
 
 #deprecated
