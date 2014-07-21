@@ -130,7 +130,7 @@ function Stop-AllEC2Instances {
     if($exclude -eq $null) {
         $instances = (Get-EC2Instance).Instances
     } else { 
-        $instances = Get-EC2InstancesWithTagName -exclude $exclude
+        $instances = Get-EC2InstancesWithTagName "*" -exclude $exclude
     }
     
     $instances | IsRunning |
