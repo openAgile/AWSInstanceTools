@@ -139,8 +139,8 @@ function Stop-AllEC2Instances {
 
 function Get-EC2InstancesWithTagName {
     param(
-    [parameter(Mandatory=$true,Position=0)]$tagName,    
-    $exclude)
+    [parameter(Mandatory=$true,Position=0)]$tagName,
+    [parameter(Mandatory=$true,Position=1)]$exclude)
     
     $instances = (Get-EC2Instance -Filter @{ Name="tag:Name"; Value="$tagName"}).Instances
     
