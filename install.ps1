@@ -10,7 +10,7 @@ if (!(gcm cinst)) {
 }
 Write-Host Chocolatey installed? $hasChoc
 
-if ($PSVersionTable.PSVersion.Major -lt 5) {
+if ($PSVersionTable.PSVersion.Major -lt 4) {
 	Write-Host "You don't have Powershell 4. Trying to install it for you via Chocolatey..."
 	cinst powershell4
 	if ($?) {
