@@ -33,7 +33,7 @@ If you're using these tools from another company, you will have to follow the in
 
 Once you have everything installed and your credentials set, try the example commands below.
 
-# Usage
+# Basic usage
 
 To test that you are configured correctly, run this command:
 
