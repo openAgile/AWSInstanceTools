@@ -13,7 +13,9 @@ Don't worry, all of these will be installed with our installation script in the 
 
 # Install
 
-First of all, if you're installing this from VersionOne, make sure you are **in the office or connected to the VPN** because the scripts use a file from `\\files`. If you're not able to do that, you'll need to run the command in this private [GitHub file](https://github.com/versionone/ProviderCredentials/blob/master/AmazonWebServices/InitializeDefaultCreds.ps1) in Powershell once you've installed everything. This will configure your system with our default credentials for AWS, and cache them so you don't have to do it every time.
+First of all, if you're installing this from VersionOne, make sure you are **in the office or connected to the VPN** because the scripts use a file from `\\files`. If you're not able to do that, you'll need to run the command in this private [GitHub file](https://github.com/versionone/ProviderCredentials/blob/master/AmazonWebServices/InitializeDefaultCreds.ps1) in Powershell once you've run the install script. This configures your system with our default credentials for AWS, and caches them so you don't have to do it every time.
+
+## Do this:
 
 * Open Powershell as Administrator.
 * Type or copy and paste the following commands:
