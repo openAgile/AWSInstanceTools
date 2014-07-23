@@ -4,25 +4,32 @@ Amazon Web Services Instance Tools lets you simplify using the [AWS Powershell T
 
 # Requirements
 
-Don't worry, all of these will be installed with our set up scripts:
+Don't worry, all of these will be installed with our installation script in the next step:
 
 * Powershell 4.0
 * Chocolatey
+* AWS Tools for Windows Powershell
 * PsGet
 
 # Install
 
-* Open Powershell as Administrator
-* Clone this repository with `git clone https://github.com/openAgile/AWSInstanceTools.git`
-* Type `cd AWSInstanceTools`
-* Type `gcm cinst` to see if you already have Chocolatey installed. If it doesn't return `cinst.bat`, then type `cmd` to start a simple command shell, then type `01_install_chocolatey.bat` to install Chocolatey. When done, open a **brand new Powershell** window as Administrator so that you have an updated PATH.
-* Type `Set-ExecutionPolicy Unrestricted` to allow running *powerful* scripts.
-* Type `$PSVersionTable.PSVersion` to see if you already have Powershell 4 installed. If not, type `.\02_install_powershell4.ps1`. This determines if you need to upgrade and uses Chocolatey to install Powershell 4 if you do. **Warning: this will prompt you to reboot to ensure all path environment variables are updated. You can try without rebooting, but you might need to anyway.**
-* Next, type `.\03_install_modules.ps1` from Powershell to install **PsGet** and the **AWSInstanceTools** module.
-* **VersionOne Team:** If you're using this as a VersionOne employee, go to our private `ProviderCredentials` repo and execute the `AmazonWebServices/InitializeDefaultCreds.ps1` script in your Powershell window. This will configure your system with the credentials for AWS. The configuration is saved, so you never have to do it again.
-* If you're using these tools from another company, you will have to follow the instructions in the [Amazon Powershell Tools Documentation](http://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up.html) for getting your default credentials set up.
+First of all, if you're installing this from VersionOne, make sure you are **in the office or connected to the VPN** because the scripts use a file from `\\files`. If you're not able to do that, you'll need to run the command in the  `AmazonWebServices/InitializeDefaultCreds.ps1` file in Powershell once you've installed everything. This will configure your system with our default credentials for AWS, and cache them so you don't have to do it every time.
 
-Once you have everything installed and your credentials set, you can try these example commands:
+* Open Powershell as Administrator.
+* Type or copy and paste the following commands:
+```
+Set-ExecutionPolicy Unrestricted
+(new-object net.webclient).DownloadString('https://raw.githubusercontent.com/openAgile/AWSInstanceTools/master/install.ps1') | iex
+```
+If all goes well, you should have everything installed now and be able to test your installation below!
+
+## Notes for people outside of VersionOne
+
+If you're using these tools from another company, you will have to follow the instructions in the [Amazon Powershell Tools Documentation](http://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up.html) for getting your default credentials set up.
+
+# Test installation
+
+Once you have everything installed and your credentials set, try the example commands below.
 
 # Usage
 
