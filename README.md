@@ -1,6 +1,6 @@
 # AWSInstanceTools
 
-Amazon Web Services Instance Tools lets you simplify using the [AWS Powershell Tools](http://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up.html) to start and stop your AWS EC2 virtual machines.
+Amazon Web Services Instance Tools lets you simplify using the [AWS Tools for Windows Powershell](http://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up.html) to start and stop your AWS EC2 virtual machines.
 
 # Requirements
 
