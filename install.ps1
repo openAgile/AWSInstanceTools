@@ -14,7 +14,6 @@ if ($PSVersionTable.PSVersion.Major -lt 4) {
 	Write-Host "You don't have Powershell 4. Trying to install it for you via Chocolatey..."
 	cinst powershell4
 	if ($?) {
-		#Write-Host "Powershell 4 upgrade succeeded! Please start a new Administrator Powershell prompt then run this command:`n`n(new-object net.webclient).DownloadString('https://raw.githubusercontent.com/openAgile/AWSInstanceTools/master/install_modules.ps1') | iex`n`n"		
 		Write-Host "Powershell 4 upgrade succeeded! Now installing additional Chocolatey packages and Powershell modules...`n`n"
 		powershell -Version 4.0 -NoExit -Command "(new-object net.webclient).DownloadString('https://raw.githubusercontent.com/openAgile/AWSInstanceTools/master/install_modules.ps1') | iex"
 
