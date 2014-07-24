@@ -20,8 +20,7 @@ First of all, if you're installing this from VersionOne, make sure you are **in 
 * Open Powershell as Administrator.
 * Type or copy and paste the following commands:
 ```
-Set-ExecutionPolicy Unrestricted
-(new-object net.webclient).DownloadString('https://raw.githubusercontent.com/openAgile/AWSInstanceTools/master/install.ps1') | iex
+Set-ExecutionPolicy Unrestricted -force; (new-object net.webclient).DownloadString('https://raw.githubusercontent.com/openAgile/AWSInstanceTools/master/install.ps1') | iex
 ```
 If all goes well, you should have everything installed now and be able to test your installation below!
 
