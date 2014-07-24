@@ -37,13 +37,13 @@ Once you have everything installed and your credentials set, try the example com
 To test that you are configured correctly, run this command:
 
 ```powershell
-Get-EC2InstancesWithFilter "*"  | select -expand Tags
+Get-EC2InstancesWithTagName "*"  | select -expand Tags
 ```
 
 Expect something like this as a result:
 
 ```
-PS C:\Users\Daniel> Get-EC2InstancesWithFilter "*"  | select -expand Tags
+PS C:\Users\Daniel> Get-EC2InstancesWithTagName "*"  | select -expand Tags
 
 Key                                                         Value
 ---                                                         -----
@@ -61,14 +61,14 @@ Name                                                        Clarity PPM
 We can get one or more instances by passing a filter. This filters by the tag name:
 
 ```powershell
-Get-EC2InstancesWithFilter "ClarityOne*"
+Get-EC2InstancesWithTagName "ClarityOne*"
 ```
 
 The previous example gets all the instances with the tag name that starts with "ClarityOne".
 We can also reduce the amount of information we show. Doing the next we only show the ip addresses for those instances:
 
 ```powershell
-Get-EC2InstancesWithFilter "ClarityOne*" | select -expand PublicIpAddress
+Get-EC2InstancesWithTagName "ClarityOne*" | select -expand PublicIpAddress
 ```
 
 # Stopping all instances
@@ -82,12 +82,12 @@ Stop-AllEC2Instances
 The next works in the same way as `Get-EC2InstancesWithFilter`, but instead of getting the instances it stops them:
 
 ```powershell
-Stop-EC2InstancesWithFilter "Clarity*"
+Stop-EC2InstancesWithTagName "Clarity*"
 ```
 
 # Starting several instances with a filter 
 Like the previous example, but starts instances:
 
 ```powershell
-Start-EC2InstancesWithFilter "Clarity*"
+Start-EC2InstancesWithTagName "Clarity*"
 ```
