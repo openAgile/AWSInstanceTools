@@ -4,7 +4,7 @@ if (test-path \\files\pub\openAgile\ProviderCredentials\AmazonWebServices\Initia
   write-host "Setting your default credentials for AWS..."
   \\files\pub\openAgile\ProviderCredentials\AmazonWebServices\InitializeDefaultCreds.ps1
 } else {
-	Write-Error "You are either not on the VersionOne network or you're not a VersionOne employee! Please refer to the AWS Tools for Windows Powershell documentation for setting your default credentials to AWS."
+	Write-Error "You are either not on the VersionOne network or you're not a VersionOne employee! Please refer to the AWS Tools for Windows Powershell documentation for caching your default AWS credentials."
 }
 (new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex
 Import-Module psget
