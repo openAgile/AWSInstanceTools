@@ -1,5 +1,9 @@
 cinst AWSTools.Powershell
-Import-Module 'C:\Program Files (x86)\AWS Tools\PowerShell\AWSPowerShell\AWSPowerShell.psd1'
+$awsPath=$Env:ProgramFiles
+if (test-path ${Env:ProgramFiles(x86)}) {
+	$awsPath=${Env:ProgramFiles(x86)}
+}
+Import-Module "$awsPath\AWS Tools\PowerShell\AWSPowerShell\AWSPowerShell.psd1"
 if (test-path \\files\pub\openAgile\ProviderCredentials\AmazonWebServices\InitializeDefaultCreds.ps1) {
   write-host "Setting your default credentials for AWS..."
   \\files\pub\openAgile\ProviderCredentials\AmazonWebServices\InitializeDefaultCreds.ps1
