@@ -17,6 +17,3 @@ Import-Module psget
 Install-Module AWSInstanceTools -Global
 Import-Module AWSInstanceTools
 Update-Module AWSInstanceTools -Global
-if ($?) {
-	Write-Host "Installation finished!"
-}
