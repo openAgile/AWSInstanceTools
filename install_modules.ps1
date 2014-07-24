@@ -8,5 +8,6 @@ if (test-path \\files\pub\openAgile\ProviderCredentials\AmazonWebServices\Initia
 }
 (new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex
 Import-Module psget
-Install-Module AWSInstanceTools -Global -Update
+Install-Module AWSInstanceTools -Global
 Import-Module AWSInstanceTools
+Update-Module AWSInstanceTools
