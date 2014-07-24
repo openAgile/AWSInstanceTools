@@ -10,4 +10,4 @@ if (test-path \\files\pub\openAgile\ProviderCredentials\AmazonWebServices\Initia
 Import-Module psget
 Install-Module AWSInstanceTools -Global
 Import-Module AWSInstanceTools
-Update-Module AWSInstanceTools
+Update-Module AWSInstanceTools -Global
