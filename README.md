@@ -28,6 +28,10 @@ If all goes well, you should have everything installed now and be able to test y
 
 If you're using these tools from another company, you will have to follow the instructions in the [Amazon Powershell Tools Documentation](http://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up.html) for getting your default credentials set up.
 
+## Troubleshooting Install
+
+Some machines have trouble with these commands. You may need to reboot after the Powershell 4 installation step, though we've tried to account for that. If you have an issue, please document it on the Issues tab in this repository.
+
 # Test installation
 
 Once you have everything installed and your credentials set, try the example commands below.
